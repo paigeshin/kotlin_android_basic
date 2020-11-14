@@ -2,7 +2,7 @@ package com.example.firstkotlinproject
 
 
 fun main() {
-    exercise()
+
 }
 
 //Mutable Variables

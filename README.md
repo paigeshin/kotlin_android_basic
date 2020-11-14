@@ -48,4 +48,5 @@ class MainActivity : AppCompatActivity() {
 - char, String 
 
 char can be represented with single quotation mark. `'a'`
+
 String can be represented with double quotation mark, `"abc"`
