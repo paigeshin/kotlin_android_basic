@@ -366,3 +366,126 @@ fun forLoop() {
 
 }
 ```
+
+# Function
+
+```kotlin
+package com.example.firstkotlinproject
+
+fun main() {
+
+}
+
+fun myFunction() {
+    print("Called from myFunction")
+}
+
+fun sum(a: Int, b: Int): Int {
+    return a + b
+}
+
+fun avg(a: Double, b: Double): Double {
+    return (a + b) / 2
+}
+```
+
+# Nullable
+
+```kotlin
+package com.example.firstkotlinproject
+
+fun main() {
+
+}
+
+fun nullable() {
+    var name: String = "Denis"
+    //name = null -> Compilation ERROR
+
+    var nullableName: String? = "Denis"
+
+    var len = name.length
+    val len2 = nullableName?.length //if nullable name is null, print 'null' instead of nullableName.length
+
+    /*
+        if(nullableName != null) {
+            var len2 = nullableName.length
+        } else {
+            null
+        }
+     */
+
+//    nullableName = null
+
+    //Give Default Value to `Nullable` Value.
+    val newName = nullableName ?: "Guest"
+    print("Name is $newName")
+
+    //Forcing nullable value
+    println("${nullableName!!.toLowerCase()}") //compile error if value is null
+
+    val length = nullableName?.let {
+        println("nullalble.let")
+        println(it.length)
+        it.length
+    }
+    print(length)
+
+}
+```
+
+### Forcing Nullable Value
+
+- Swift
+
+```swift
+var name: String? = "Hello World"
+print(name!.count)
+```
+
+- Kotlin
+
+```kotlin
+var name: String? = "Hello World"
+print(name!!.length)
+```
+
+### Set Default Value
+
+- Swift
+
+```swift
+var name: String? = "Hello World"
+print(name ?? "Hello")
+```
+
+- Kotlin
+
+```swift
+var name: String? = "Hello World"
+print(name ?: "Hello") 
+```
+
+### Execution & Save
+
+- Swift
+
+```swift
+let name: String? = "Hello World"
+guard let name: String = name else {
+	print("")
+	print("")
+	return
+}
+```
+
+- Kotlin
+
+```kotlin
+var name: String? = "Hello World"
+val length = name?.let {
+		println()
+    println()
+    it.length
+}
+```
