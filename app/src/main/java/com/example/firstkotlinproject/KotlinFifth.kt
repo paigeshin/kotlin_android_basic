@@ -39,6 +39,6 @@ fun nullable() {
         it.length
     }
     print("save .let")
-    printl(length)
+    print(length)
 
 }
