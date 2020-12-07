@@ -7,8 +7,8 @@ fun main() {
     var paige: Person = Person("Paige", "Shin")
     var hyunhee: Person = Person(firstName = "Hyunhee", lastName = "Lee")
 
-    var car = Car()
-    car.owner = ""
+//    var car = Car()
+//    car.owner = ""
 
 
 }
@@ -48,41 +48,5 @@ class Person constructor(firstName: String = "John", lastName: String = "Doe") {
 }
 
 //get, set is automatically generated.
-class Car() {
-    lateinit var owner: String //initialize later on
-
-    val myBrand: String = "BMW"
-
-    get() {
-        return field.toLowerCase()
-    }
-
-    var maxSpeed: Int = 250
-
-    set(value) {
-        field = if(value > 0) value else throw IllegalArgumentException("MaxSpped can't be less than 0")
-    }
-
-    //Whenever you create a member variable in class, get, set code is automatically generated.
-    /*
-        get() = field
-        set(value) {
-            field = value
-        }
-     */
-    var newValueField: Int =  150
-    get() = field
-    set(value) {
-        field = value
-    }
-
-    //private set
-    var myModel: String = "M5"
-    private set //if you use this keyword, you can't set this value outside of class
-
-    init {
-        this.owner = "Frank"
-        this.myModel = "M3"
-    }
 
 }

@@ -663,3 +663,255 @@ class Car() {
 
 }
 ```
+
+### Data class
+
+```kotlin
+package com.example.firstkotlinproject
+
+//data class must have at least one parameter
+data class User(val id: Long, val name: String)
+
+fun main() {
+    val user = User(id = 1, name = "denis")
+    val updatedUser = user.copy(name = "Denis Panjuta")
+    print(updatedUser.component1()) // prints 1
+    print(updatedUser.component2()) // prints Denis Panjuta
+    val (id, name) = updatedUser
+    print("id=$id")
+    print("name=$name")
+}
+```
+
+### Inheritance
+
+```kotlin
+package com.example.firstkotlinproject
+
+/*
+The class that inherits the features of another
+class is called the Sub class or Child class or
+Derived class, and the class whose features are
+inherited is called the Super class or Parent class
+or Base class
+ */
+
+//open class which allows inheritance
+open class Vehicle {
+    // properties
+    // methods
+}
+
+// not inheritable class
+sealed class HelloCar {
+
+}
+
+//sub class of vehicle
+//super class, parent class, base class of vehicle
+open class Car(val name: String, val brand: String): Vehicle() {
+    open var range: Double = 0.0
+
+    fun extendRange(amount: Double) {
+        if(amount > 0)
+            range += amount
+    }
+
+    open fun drive(distance: Double) {
+        println("Drove for $distance KM")
+    }
+
+}
+
+// sub class  child class or derived class of Car
+class ElectricCar(name: String, brand: String, batteryLife: Double):  Car(name, brand) {
+
+    var chargerType: String = "Type1"
+    override var range: Double = batteryLife * 6
+
+    override fun drive(distance: Double) {
+        println("Drove for $distance KM on electricity")
+    }
+
+    fun drive() {
+        println("Drove for $range KM on electricity")
+    }
+
+}
+```
+
+### Interface
+
+```kotlin
+package com.example.firstkotlinproject
+
+/*
+The class that inherits the features of another
+class is called the Sub class or Child class or
+Derived class, and the class whose features are
+inherited is called the Super class or Parent class
+or Base class
+ */
+
+interface Drivable {
+    var maxSpeed: Double
+    fun drive(): String //undefined function
+    fun brake() { //defined function
+        println("The drivable is breaking")
+    }
+}
+
+//open class which allows inheritance
+open class Vehicle {
+    // properties
+    // methods
+}
+
+// not inheritable class
+sealed class HelloCar {
+
+}
+
+//sub class of vehicle
+//super class, parent class, base class of vehicle
+open class Car(override var maxSpeed: Double, val name: String, val brand: String): Vehicle(), Drivable {
+    open var range: Double = 0.0
+
+    fun extendRange(amount: Double) {
+        if(amount > 0)
+            range += amount
+    }
+
+    open fun drive(distance: Double) {
+        println("Drove for $distance KM")
+    }
+
+    // override fun drive(): String = "driving the interface drive"
+    override fun drive(): String {
+        return "driving the interface drive"
+    }
+
+}
+
+// sub class  child class or derived class of Car
+class ElectricCar(maxSpeed: Double, name: String, brand: String, batteryLife: Double):  Car(maxSpeed, name, brand) {
+
+    var chargerType: String = "Type1"
+    override var range: Double = batteryLife * 6
+
+    override fun drive(distance: Double) {
+        println("Drove for $distance KM on electricity")
+    }
+
+    override fun drive(): String {
+        return "Drove for  $range KM on electricity"
+    }
+
+    override fun brake() {
+        super.brake()
+        
+    }
+
+}
+```
+
+### Abstract Class
+
+```kotlin
+package com.example.firstkotlinproject
+
+/*
+
+- An abstract class cannot be instantiated
+- You cannot create objects of an abstract class
+- However, you can inherit subclasses from an abstract class
+- The members (properties and methods) of an abstract class are non-abstract
+- Unless you explicitly use the abstract keyword to make them abstract
+
+*/
+
+abstract class Mammal(private val name: String,  private val origin: String, private val weight: Double) {
+
+    // Abstract Property (Must be overriden by Subclasses)
+    abstract var maxSpeed: Double
+
+    // Abstract Methods (Must be implemented by Subclasses)
+    abstract fun run()
+    abstract fun breath()
+
+    // Concrete (Non Abstract) Method
+    fun displayDetails() {
+        println("Name: $name, Origin: $origin, Weight: $weight, Max Speed: $maxSpeed")
+    }
+
+}
+
+class Human(name: String, origin: String, weight: Double, override var maxSpeed: Double): Mammal(name, origin, weight) {
+
+    override fun run() {
+
+    }
+
+    override fun breath() {
+
+    }
+
+}
+```
+
+### Interfaces
+
+```kotlin
+package com.example.firstkotlinproject
+
+fun main() {
+
+    val stringList: List<String> = listOf("Denis", "Frank", "Micheal", "Garry")
+    val mixedTypeList: List<Any> = listOf("Denis", 31, 5, "BDay", 70.5, "weights", "Kg")
+
+    for(value in mixedTypeList) {
+        if (value is Int) {
+            println("Integer: $value")
+        } else if (value is Double) {
+            println("Double: $value")
+        } else if (value is String) {
+            println("String: $value")
+        } else {
+            println("Unknown Type")
+        }
+    }
+
+    // Alternately
+    for(value in mixedTypeList) {
+        when(value) {
+            is Int -> println("Integer: $value")
+            is Double -> println("Double: $value")
+            is String -> println("String: $value")
+            else -> println("Unknown Type")
+        }
+    }
+
+    // SMART CAST
+    val obj1: Any = "I have a dream"
+    if(obj1 !is String) {
+        println("Not a String")
+    } else {
+        //obj is automatically cast to a String in this scope
+        println("Found a String of length ${obj1.length}")
+    }
+
+    // Explicit(unsafe) Casting using the "as" keyword - can go wrong
+    val str1: String = obj1 as String
+    println(str1.length)
+
+    val obj2: Any = 1337
+    val str2: String = obj2 as String
+    println(str2)
+
+    // Explicit (safe) casting using the "as?" keyword
+    val obj3: Any = 1337
+    val str3: String? = obj3 as? String // Works
+    println(str3)
+
+}
+```
