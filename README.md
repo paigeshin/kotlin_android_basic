@@ -859,7 +859,7 @@ class Human(name: String, origin: String, weight: Double, override var maxSpeed:
 }
 ```
 
-### Interfaces
+### Casting
 
 ```kotlin
 package com.example.firstkotlinproject
