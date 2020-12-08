@@ -915,3 +915,293 @@ fun main() {
 
 }
 ```
+
+```kotlin
+fun createArrayListAndCalculate(): Double {
+
+    val arrayList: ArrayList<Double> = ArrayList(5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+
+    var sum: Double = 0.0
+    for(element in arrayList) {
+        sum += element
+    }
+
+    return sum / arrayList.size
+}
+```
+
+# Why should you use ArrayLists?
+
+- ArrayLists are used to create a dynamic array. Which means the size of an ArrayList can be increased or decreased according to your requirement.
+- The ArrayList class provides both **read and write** functionalities.
+- The ArrayList follows the **sequence of insertion** order.
+- An ArrayList is **non synchronized** and it may contain duplicate elements.
+
+# Constructor of ArrayList
+
+- ArrayList<E>(): Is used to create an empty ArrayList.
+- ArrayList(capacity: Int): Is used to create an ArrayList of specified capacity.
+- ArrayList(elements: Collection<E>): Is used to create an ArrayList filled with the elements of a collection.
+
+# Functions of ArrayList
+
+- open fun add(element: E): Boolean → used to add the specific element into the collection.
+- open fun clear() → used to remove all elements from the collection.
+- open fun get(index: Int): E → used to return element at specified index in the list.
+- open fun remove(element: E): Boolean → used to remove a single instance of the specific element from current collection, if it is available.
+- There are of course many more functions in the ArrayList Class.
+
+# Example of ArrayList
+
+```kotlin
+fun createArrayListAndCalculate(): Double {
+
+    val arrayList: ArrayList<Double> = ArrayList(5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+    arrayList.add(0.5)
+
+    var sum: Double = 0.0
+    for(element in arrayList) {
+        sum += element
+    }
+
+    return sum / arrayList.size
+}
+```
+
+# Lambda Expressions
+
+- Lambda (Expression) is a function which has no name. (Anonymous function)
+- Lambda expressions and anonymous functions are 'function literals', i.e. functions that are not declared, but passed immediately as an expression
+- Lambda is defined with curly braces { } which takes variables as a parameter (if any) and a body of a function
+- The body of a function is written after the variable (if any) followed by → operator.
+- Syntax: { variable(s) → body_of_lambda }
+
+# Normal function: addition of two numbers
+
+```kotlin
+// normal function
+fun addNumber(a: Int, b: Int) {
+	val add = a + b
+	println(add)
+}
+
+// using lambda expression, return
+val sum: (Int, Int) -> Int = { a: Int, b: Int -> a + b } 
+
+// even shorter, not returning value 
+val sum = { a: Int, b: Int -> println(a + b) } 
+```
+
+# Visibility Modifiers - public - private - internal - protected
+
+### What is a Visibility Modifier?
+
+- Visibility modifiers are the keywords which are used to restrict the use of classes, interfaces, methods, and properties in Kotlin.
+- These modifiers are used at multiple places such as class header or method body.
+- Visibility Modifiers are categorized into four different types:
+    - public
+    - private
+    - protected
+    - internal
+
+### Public Modifier
+
+- A **public** modified element is accessible from everywhere in the project.
+- It is a **default modifie**r in Kotlin. If any class, interface etc. are not specified with any access/visibility modifier then that class, interface etc. is used in a public scope.
+- All public declarations can be placed at the top of the file.
+- If a member of a class is not specified then it is **by default public.**
+
+### Private Modifier
+
+- A private modifier allows the element to be accessible only within the **block in which properties, fields, etc. are declared.**
+- The **private** modifier declaration does not allow access outside the scope.
+- A **private** package can be accessible within that specific file.
+
+### Internal Modifier
+
+- The **internal** modifier is feature in Kotlin, which is not available in Java.
+- The **internal** modifier makes the field visible only inside the module in which it is implemented.
+- All the fields are declared as internal which are accessible only inside the module in which they are implemented.
+
+### Open keyword
+
+- In Kotlin all classes are **final** by default, so they **can't be inherited** by default
+- Side note: **in Java it's the opposite**, there you have to make your class final explicitly
+- So to make a class inheritable to other classes you must mark it with the **open keyword**, else you get an error "type is final so can't be inherited"
+
+### Protected Modifier
+
+- A **protected modifier** with a class or an interface allows visibility to its class or subclass only.
+- A protected declaration (when overridden) it its subclass is also protected unless it is explicitly changed.
+- **The Protected modifier** CANNOT be declared at top level. (for Packages)
+
+# Nested class and Inner class
+
+- A class which is created inside another class and a class which is created inside another class with keyword inner
+
+### Nested class
+
+- **Nested class** is such class which is created inside another class.
+- In Kotlin, a nested class is by default static, so its data members and member functions can be accessed without creating an object of the class.
+- Nested classes cannot access the data members of outer classes.
+
+```kotlin
+class OuterClass {
+	class NestedClass {
+	}
+}
+```
+
+### Inner class
+
+- **An Inner class** is a class which is created inside another class with **keyword inner.**
+- In other words, we can say that a nested class which is marked as **"inner"** is called inner class.
+- Inner class cannot be declared inside interfaces or non-inner nested classes.
+- The advantage of inner class over nested class is that, it is able to access members of its outer class even it is private.
+
+```kotlin
+class OuterClass {
+	inner class InnerClass {
+	}	
+}
+```
+
+# Safe Cast and Unsafe Cast Operator
+
+### Unsafe cast operator: as
+
+- Sometimes it is not possible to cast a variable and it throws an exception, this is called an **unsafe cast.**
+- The unsafe cast is performed by the infix operator **as.**
+
+### Unsafe cast example
+
+- A nullable string(String?) cannot be cast to non nullable string(String), this throws an exception.
+
+```kotlin
+fun main(args: Array<String>) {
+	val obj: Any? = null
+	val str: String = obj as String
+	println(str)
+}
+// Output:
+// Exception in thread "main" kotlin.TypeCastException: null cannot be cast to non-null type kotlin. String.
+```
+
+### Generates a ClassCastException
+
+- Trying to cast an integer value of the **Any** type into a string type leads to a ClassCastException.
+
+```kotlin
+val obj: Any = 123
+val str: String = obj as String 
+//Throws java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
+```
+
+### Nullable for Casting to work:
+
+- Source and target variables needs to be a nullable for casting to work:
+
+```kotlin
+fun main(args: Array<String>) {
+	val obj: Any? = "String unsafe cast"
+	val str: String? = obj as String? //Works
+	println(str)
+}
+```
+
+### Safe cast operator: as?
+
+- as? provides a safe cast operation to safely cast to a type
+- It returns a null if casting is not possible rather than throwing an ClassCastException exception.
+
+```kotlin
+fun main(args: Array<String>){
+	val location: Any = "Kotlin"
+	val safeString: String? = location as? String
+	val safeInt: Int? = location as? Int
+	println(safeString) //kotlin 
+	println(safeInt) //null 
+}
+```
+
+# Exception Handling With Try and Catch
+
+- Handling runtime problems which occur in the program and would otherwise lead to program termination.
+
+### What is an Exception?
+
+- **An Exception** is a runtime problem which occurs in the program and leads to program termination.
+    - running out of memory
+    - array out of bound
+    - condition like divide by zero
+- To handle this type of problem during program execution the technique of **exception handling** is used.
+- **Exception handling** is a technique which handles the runtime problems and maintains the flow of program execution.
+
+# Throwable Class
+
+- throw MyException ("this throws an exception")
+- There are four different keywords used in exception handling: These are
+    - try, catch, finally, throw
+
+### Keywords used in exception handling
+
+- **try:** the try block contains a set of statements which might generate an exception. It must be followed by either catch to finally or both.
+- **catch:** the catch block is used to catch the exception thrown from try block.
+- **finally:** finally block always execute whether exception is handled or not. So it is used to execute important code statement. (like closing buffers)
+- **throw:** the throw keyword is used to throw an exception explicitly.
+
+### Unchecked Exception
+
+- Unchecked exception is that exception is thrown due to mistakes in our code.
+- This exception type extends the **RuntimeException** class.
+- The Unchecked exception is checked at run time.
+
+### Example of unchecked exception
+
+- **ArithmeticException:** thrown when we divide a number by zero.
+- **ArrayIndexOutOfBoundExceptions:** thrown when an array has been tried to access with incorrect index value.
+- **SecurityException:** thrown by the security manager to indicate a security violation.
+- **NullPointerException:** thrown when invoking a method or property on a null object.
+
+### Checked Exception
+
+- A Checked exception is checked at compile time.
+- This exception type extends the **Throwable** class.
+- IOException.
+- SQLException etc.
+
+### throw example
+
+```kotlin
+fun main(args: Array<String>) {
+	validate(15)
+	println("Code after validation check...")
+}
+ 
+fun validate(age: Int) {
+	if(age < 18) 
+		throw ArithmeticException("under age")
+	else 
+		println("eligible for drive")
+}
+
+```
+
+**ℹ️ Why would you use a nested class over an outer class?**
+
+⇒ So its data members and member function can be accessed without creating an object of the class.
+
+### Safe Casting
+
+```kotlin
+val x: String? = y as? String 
+```
